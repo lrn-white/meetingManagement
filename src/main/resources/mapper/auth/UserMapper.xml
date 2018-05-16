@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liu.meetingmanagement.auth.dao.UserDao" >
+    <resultMap id="BaseResultMap" type="com.liu.meetingmanagement.auth.model.SysUser" >
+
+        <id column="userID" property="userID" jdbcType="INTEGER" />
+        <result column="userName" property="userName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--判断该用户账号密码是否正确-->
+    <select id="getUser" resultMap="BaseResultMap" parameterType="com.liu.meetingmanagement.auth.model.SysUser">
+        SELECT *
+        FROM sys_user
+        WHERE userName = #{userName} AND password = #{password}
+    </select>
+</mapper>

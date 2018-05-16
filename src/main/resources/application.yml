@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+#slf4j配置
+logging:
+  pattern:
+    console: "%d - %msg%n"
+
+#数据库配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/meetingmanagement?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 0
+    database: 0
+
+#配置mapper
+mybatis:
+  mapper-locations: classpath*:mapper/*/**Mapper.xml
