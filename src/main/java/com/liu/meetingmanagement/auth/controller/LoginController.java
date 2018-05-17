@@ -19,10 +19,9 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2018/5/16 13:13
  */
 @Controller
-@RequestMapping(value = "/auth")
 public class LoginController {
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login")
     public String submitLogin(String username, String password, HttpServletRequest request) {
         try {
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
@@ -30,21 +29,18 @@ public class LoginController {
             subject.login(token);
             SysUser user = (SysUser) subject.getPrincipal();
         } catch (DisabledAccountException e) {
-            request.setAttribute("msg", "账户已被禁用");
-            return "/auth/login.html";
+            return "/login.html";
         } catch (AuthenticationException e) {
-            request.setAttribute("msg", "用户名或密码错误");
-            return "/auth/login.html";
+            return "/login.html";
         }
-
         // 执行到这里说明用户已登录成功
-        return "redirect:/auth/index";
+        return "redirect:/index";
     }
 
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
-        return "/auth/login.html";
+        return "/login.html";
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
@@ -55,10 +51,10 @@ public class LoginController {
         if (currentLoginUser != null && StringUtils.isNotEmpty(currentLoginUser.getUserName())) {
             username = currentLoginUser.getUserName();
         } else {
-            return "redirect:/auth/login";
+            return "redirect:/login";
         }
         request.setAttribute("username", username);
-        return "/auth/index.html";
+        return "/index.html";
     }
 
     //被踢出后跳转的页面

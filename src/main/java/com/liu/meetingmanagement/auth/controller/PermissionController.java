@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
 
@@ -15,16 +16,15 @@ import java.util.Set;
  * @author 刘仁楠
  * @date 2018/5/16 13:18
  */
-@Controller
-@RequestMapping(value = "/music")
-public class MusicInfoController {
+@RestController
+@RequestMapping(value = "/permission")
+public class PermissionController {
 
     @Autowired
     private UserService userService;
 
     @RequestMapping("/login")
     @RequiresPermissions({"/usersPage"})
-    @ResponseBody
     public String login(){
         SysUser user = RequestUtils.currentLoginUser();
         Set<String> authorization = userService.getResourcesUrlByUserID(user.getUserID());
