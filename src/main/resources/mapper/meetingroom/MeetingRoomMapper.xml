@@ -15,4 +15,16 @@
         SELECT *
         FROM meeting_room
     </select>
+
+    <!--获得会议室数量-->
+    <select id="countMeetingRoom" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM meeting_room
+    </select>
+
+    <!--根据roomID删除会议室-->
+    <delete id="deleteMeetingRoomByRoomID" parameterType="java.lang.Integer">
+        DELETE FROM meeting_room
+        WHERE roomID = #{arg1}
+    </delete>
 </mapper>

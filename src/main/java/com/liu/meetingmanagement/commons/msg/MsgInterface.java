@@ -6,7 +6,8 @@ package com.liu.meetingmanagement.commons.msg;
  */
 public interface MsgInterface {
 
+    String getMsg();
+
     int getCode();
 
-    String getMsg();
 }

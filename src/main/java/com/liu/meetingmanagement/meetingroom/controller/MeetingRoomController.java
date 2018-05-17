@@ -28,9 +28,18 @@ public class MeetingRoomController {
      * @author 刘仁楠
      * @date 2018/5/15 11:38
      */
-    @PostMapping("/getAllMeetingRoom")
-    public Map<String, Object> getAllMeetingRoom(){
-        return meetingRoomService.getAllMeetingRoom();
+    @RequestMapping("/getAllMeetingRoom")
+    public Map<String, Object> getAllMeetingRoom(int page, int limit){
+        return meetingRoomService.getAllMeetingRoom(page,limit);
     }
 
+    /**
+     * 根据roomID删除会议室
+     * @author 刘仁楠
+     * @date 2018/5/17 16:58
+     */
+    @RequestMapping("/deleteMeetingRoomByRoomID")
+    public Map<String,Object> deleteMeetingRoomByRoomID(Integer roomID){
+        return meetingRoomService.deleteMeetingRoomByRoomID(roomID);
+    }
 }

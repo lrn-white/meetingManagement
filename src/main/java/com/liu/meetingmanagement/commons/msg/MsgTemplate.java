@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -21,7 +22,7 @@ public class MsgTemplate {
      * @return
      */
     public static Map<String, Object> successMsg() {
-        return successMsg(null);
+        return successMsg(null,0);
     }
 
     /**
@@ -29,29 +30,29 @@ public class MsgTemplate {
      * @param data 输出数据
      * @return
      */
-    public static Map<String, Object> successMsg(Object data) {
-        return customMsg(true, 100000, "", data);
+    public static Map<String, Object> successMsg(Object data,int count) {
+        return customMsg(0,"", count,data);
     }
 
-    /**
-     * 成功输出
-     * @param message  MsgInterface接口类型
-     * @param data     输出数据
-     * @return
-     */
-    public static Map<String, Object> successMsg(MsgInterface message, Object data){
-        return customMsg(true, message.getCode(), message.getMsg(), data);
-    }
+//    /**
+//     * 成功输出
+//     * @param message  MsgInterface接口类型
+//     * @param data     输出数据
+//     * @return
+//     */
+//    public static Map<String, Object> successMsg(MsgInterface message, Object data){
+//        return customMsg(true, message.getCode(), message.getMsg(), data);
+//    }
 
-    /**
-     * 错误输出
-     * @param message  MsgInterface接口类型
-     * @param data     输出数据
-     * @return
-     */
-    public static Map<String, Object> failureMsg(MsgInterface message, Object data){
-        return customMsg(false, message.getCode(), message.getMsg(), data);
-    }
+//    /**
+//     * 错误输出
+//     * @param message  MsgInterface接口类型
+//     * @param data     输出数据
+//     * @return
+//     */
+//    public static Map<String, Object> failureMsg(MsgInterface message, Object data){
+//        return customMsg(false, message.getCode(), message.getMsg(),14, data);
+//    }
 
     /**
      * 错误输出
@@ -59,33 +60,23 @@ public class MsgTemplate {
      * @return
      */
     public static Map<String, Object> failureMsg(MsgInterface message) {
-        return customMsg(false, message.getCode(), message.getMsg(), null);
-    }
-
-    /**
-     * 错误输出,不建议使用，违反统一输出规范
-     * @param error 错误输出
-     * @return
-     */
-    @Deprecated
-    public static Map<String, Object> failureMsg(String error) {
-        return customMsg(false, 310001, error, null);
+        return customMsg( message.getCode(), message.getMsg(),0, null);
     }
 
     /**
      * Custom map.
      *
-     * @param success the success
      * @param msgCode the enums code
      * @param message the message
      * @param data    the data
      * @return the map
      */
-    private static Map<String, Object> customMsg(boolean success, int msgCode, String message, Object data) {
-        Map<String, Object> result = new HashMap<String, Object>();
-        result.put("success", success);
+    private static Map<String, Object> customMsg(int msgCode, String message, int count,Object data) {
+//        LinkedHashMap存入的值不会自动排序
+        Map<String, Object> result = new LinkedHashMap<String, Object>();
         result.put("code", msgCode);
         result.put("msg", message);
+        result.put("count",count);
         result.put("data", data);
         try {
             ObjectMapper mapper = new ObjectMapper();

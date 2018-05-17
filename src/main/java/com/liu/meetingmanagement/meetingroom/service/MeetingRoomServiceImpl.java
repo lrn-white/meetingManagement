@@ -1,5 +1,6 @@
 package com.liu.meetingmanagement.meetingroom.service;
 
+import com.github.pagehelper.PageHelper;
 import com.liu.meetingmanagement.commons.msg.MsgEnum;
 import com.liu.meetingmanagement.commons.msg.MsgTemplate;
 import com.liu.meetingmanagement.meetingroom.dao.MeetingRoomDao;
@@ -33,11 +34,39 @@ public class MeetingRoomServiceImpl implements MeetingRoomService{
      * @date 2018/5/15 11:36
      */
     @Override
-    public Map<String, Object> getAllMeetingRoom() {
+    public Map<String, Object> getAllMeetingRoom(int pageNum, int pageSize) {
+        //使用分页插件,核心代码就这一行
+        PageHelper.startPage(pageNum, pageSize);
         List<MeetingRoom> meetingRooms = meetingRoomDao.getAllMeetingRoom();
+        Integer count = countMeetingRoom();
         if (ObjectUtils.isEmpty(meetingRooms)){
             return MsgTemplate.failureMsg(MsgEnum.OPS_EMPTY);
         }
-        return MsgTemplate.successMsg(meetingRooms);
+        return MsgTemplate.successMsg(meetingRooms,count);
+    }
+
+    /**
+     * 获得会议室数量
+     * @author 刘仁楠
+     * @date 2018/5/17 16:21
+     */
+    @Override
+    public Integer countMeetingRoom() {
+        return meetingRoomDao.countMeetingRoom();
+    }
+
+    /**
+     * 根据roomID删除会议室
+     * @author 刘仁楠
+     * @date 2018/5/17 16:58
+     */
+    @Override
+    public Map<String,Object> deleteMeetingRoomByRoomID(Integer roomID){
+        if (roomID.equals("")){
+            return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);
+        }else {
+            meetingRoomDao.deleteMeetingRoomByRoomID(roomID);
+            return MsgTemplate.successMsg();
+        }
     }
 }
