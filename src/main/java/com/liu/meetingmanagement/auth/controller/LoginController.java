@@ -37,13 +37,7 @@ public class LoginController {
         return "redirect:/index";
     }
 
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage() {
-        return "/login.html";
-    }
-
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = "/index")
     public String loginSuccessMessage(HttpServletRequest request) {
         String username = "未登录";
         SysUser currentLoginUser = RequestUtils.currentLoginUser();
@@ -58,7 +52,7 @@ public class LoginController {
     }
 
     //被踢出后跳转的页面
-    @RequestMapping(value = "/kickout", method = RequestMethod.GET)
+    @RequestMapping(value = "/kickout")
     public String kickOut() {
         return "/auth/kickout.html";
     }
