@@ -32,5 +32,26 @@ public interface MeetingRoomDao {
      * @author 刘仁楠
      * @date 2018/5/17 17:04
      */
-    public void deleteMeetingRoomByRoomID(Integer roomID);
+    public void deleteMeetingRoomByRoomID(int roomID);
+
+    /**
+     * 根据roomID获取会议室详情
+     * @author 刘仁楠
+     * @date 2018/5/18 10:05
+     */
+    public MeetingRoom getMeetingRoomByRoomID(int roomID);
+
+    /**
+     * 根据roomID修改会议室详情
+     * @author 刘仁楠
+     * @date 2018/5/18 15:17
+     */
+    public void updateMeetingRoomByRoomID(MeetingRoom meetingRoom);
+
+    /**
+     * 新增会议室
+     * @author 刘仁楠
+     * @date 2018/5/18 16:21
+     */
+    public void newMeetingRoom(MeetingRoom meetingRoom);
 }

@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @Transactional(rollbackFor = Exception.class)
 @Service
-public class MeetingRoomServiceImpl implements MeetingRoomService{
+public class MeetingRoomServiceImpl implements MeetingRoomService {
 
     @Autowired
     private MeetingRoomDao meetingRoomDao;
@@ -39,14 +39,15 @@ public class MeetingRoomServiceImpl implements MeetingRoomService{
         PageHelper.startPage(pageNum, pageSize);
         List<MeetingRoom> meetingRooms = meetingRoomDao.getAllMeetingRoom();
         Integer count = countMeetingRoom();
-        if (ObjectUtils.isEmpty(meetingRooms)){
+        if (ObjectUtils.isEmpty(meetingRooms)) {
             return MsgTemplate.failureMsg(MsgEnum.OPS_EMPTY);
         }
-        return MsgTemplate.successMsg(meetingRooms,count);
+        return MsgTemplate.successMsg(meetingRooms, count);
     }
 
     /**
      * 获得会议室数量
+     *
      * @author 刘仁楠
      * @date 2018/5/17 16:21
      */
@@ -57,16 +58,50 @@ public class MeetingRoomServiceImpl implements MeetingRoomService{
 
     /**
      * 根据roomID删除会议室
+     *
      * @author 刘仁楠
      * @date 2018/5/17 16:58
      */
     @Override
-    public Map<String,Object> deleteMeetingRoomByRoomID(Integer roomID){
-        if (roomID.equals("")){
-            return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);
-        }else {
-            meetingRoomDao.deleteMeetingRoomByRoomID(roomID);
-            return MsgTemplate.successMsg();
+    public Map<String, Object> deleteMeetingRoomByRoomID(Integer roomID) {
+        meetingRoomDao.deleteMeetingRoomByRoomID(roomID);
+        return MsgTemplate.successMsg();
+    }
+
+    /**
+     * 根据roomID获取会议室详情
+     *
+     * @author 刘仁楠
+     * @date 2018/5/18 10:05
+     */
+    @Override
+    public Map<String, Object> getMeetingRoomByRoomID(Integer roomID) {
+        MeetingRoom meetingRoom = meetingRoomDao.getMeetingRoomByRoomID(roomID);
+        if (ObjectUtils.isEmpty(meetingRoom)) {
+            return MsgTemplate.failureMsg(MsgEnum.OPS_EMPTY);
         }
+        return MsgTemplate.successMsg(meetingRoom);
+    }
+
+    /**
+     * 根据roomID修改会议室详情
+     * @author 刘仁楠
+     * @date 2018/5/18 15:17
+     */
+    @Override
+    public Map<String,Object> updateMeetingRoomByRoomID(MeetingRoom meetingRoom){
+        meetingRoomDao.updateMeetingRoomByRoomID(meetingRoom);
+        return MsgTemplate.successMsg();
+    }
+
+    /**
+     * 新增会议室
+     * @author 刘仁楠
+     * @date 2018/5/18 16:21
+     */
+    @Override
+    public Map<String,Object> newMeetingRoom(MeetingRoom meetingRoom){
+        meetingRoomDao.newMeetingRoom(meetingRoom);
+        return MsgTemplate.successMsg();
     }
 }

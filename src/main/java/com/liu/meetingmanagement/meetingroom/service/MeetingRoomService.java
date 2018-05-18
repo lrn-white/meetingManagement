@@ -1,5 +1,7 @@
 package com.liu.meetingmanagement.meetingroom.service;
 
+import com.liu.meetingmanagement.meetingroom.model.MeetingRoom;
+
 import java.util.Map;
 
 /**
@@ -28,4 +30,25 @@ public interface MeetingRoomService {
      * @date 2018/5/17 16:58
      */
     public Map<String,Object> deleteMeetingRoomByRoomID(Integer roomID);
+
+    /**
+     * 根据roomID获取会议室详情
+     * @author 刘仁楠
+     * @date 2018/5/18 10:05
+     */
+    public Map<String,Object> getMeetingRoomByRoomID(Integer roomID);
+
+    /**
+     * 根据roomID修改会议室详情
+     * @author 刘仁楠
+     * @date 2018/5/18 15:17
+     */
+    public Map<String,Object> updateMeetingRoomByRoomID(MeetingRoom meetingRoom);
+
+    /**
+     * 新增会议室
+     * @author 刘仁楠
+     * @date 2018/5/18 16:21
+     */
+    public Map<String,Object> newMeetingRoom(MeetingRoom meetingRoom);
 }

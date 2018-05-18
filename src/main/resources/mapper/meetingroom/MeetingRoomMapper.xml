@@ -27,4 +27,34 @@
         DELETE FROM meeting_room
         WHERE roomID = #{arg1}
     </delete>
+
+    <!--根据roomID获取会议室详情-->
+    <select id="getMeetingRoomByRoomID" parameterType="java.lang.Integer" resultMap="MeetingRoomMap">
+        SELECT *
+        FROM meeting_room
+        WHERE roomID = #{arg1}
+    </select>
+
+    <!--根据roomID修改会议室详情-->
+    <update id="updateMeetingRoomByRoomID">
+        UPDATE meeting_room
+        <set>
+            <if test="roomName!=null">
+                roomName = #{roomName},
+            </if>
+            <if test="roomCapacity!=null">
+                roomCapacity = #{roomCapacity},
+            </if>
+            <if test="roomLocation!=null">
+                roomLocation = #{roomLocation},
+            </if>
+        </set>
+        WHERE roomID = #{roomID}
+    </update>
+
+    <!--新增会议室-->
+    <insert id="newMeetingRoom" parameterType="com.liu.meetingmanagement.meetingroom.model.MeetingRoom">
+        INSERT INTO meeting_room (roomName, roomCapacity, roomLocation)
+        VALUE (#{roomName}, #{roomCapacity} ,#{roomLocation})
+    </insert>
 </mapper>
