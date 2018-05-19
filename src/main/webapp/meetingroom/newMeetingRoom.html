@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../layui/css/layui.css" media="all">
 </head>
 <body>
-<form class="layui-form" style="padding-top: 10px" action="/meetingroom/newMeetingRoom">
+<form class="layui-form" style="padding-top: 10px">
     <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">会议室名</label>
@@ -46,6 +46,7 @@
 </form>
 
 <script src="../layui/layui.js" charset="utf-8"></script>
+<script src="../layui/jquery-3.3.1.min.js"></script>
 <script>
     layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form
@@ -53,23 +54,22 @@
             , layedit = layui.layedit
             , laydate = layui.laydate;
 
-        //监听提交
-        form.on('submit(demo1)', function (data) {
-            var datas = data.field;
-            var action=data.form.action;
+        form.on('submit(save)', function (data) {
             $.ajax({
-                url:action,
-                data:datas,
-                type:"POST",
-                dataType:"json",
-                success:function(){
-                    var index = parent.layer.getFrameIndex(window.name);
-                    parent.layer.close(index);
-                },
-                error:function(error){
-                    alert(error)
-                }
-            });
+                    url: "/meetingroom/newMeetingRoom?roomName=" + data.field.roomName + "&roomCapacity="
+                    + data.field.roomCapacity + "&roomLocation=" + data.field.roomLocation,
+                    type: "post",
+                    success: function () {
+//                        关闭当前页面
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+//                        刷新父页面
+                        parent.location.reload();
+                    },
+                    error: function () {
+                        alert("对不起！数据加载失败！");
+                    }
+                })
             return false;
         });
     });
