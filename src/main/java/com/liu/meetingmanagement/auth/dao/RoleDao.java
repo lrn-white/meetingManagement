@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.Set;
 
 /**
+ * 角色dao层
  * @author 刘仁楠
  * @date 2018/5/16 11:23
  */

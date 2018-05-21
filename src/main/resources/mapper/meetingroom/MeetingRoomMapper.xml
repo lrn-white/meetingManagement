@@ -57,4 +57,11 @@
         INSERT INTO meeting_room (roomName, roomCapacity, roomLocation)
         VALUE (#{roomName}, #{roomCapacity} ,#{roomLocation})
     </insert>
+
+    <!--根据会议室名查询会议室-->
+    <select id="getMeetingRoomByRoomName" parameterType="java.lang.String" resultMap="MeetingRoomMap">
+        SELECT *
+        FROM meeting_room
+        WHERE roomName = #{arg1}
+    </select>
 </mapper>

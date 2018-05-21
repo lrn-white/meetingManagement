@@ -51,4 +51,11 @@ public interface MeetingRoomService {
      * @date 2018/5/18 16:21
      */
     public Map<String,Object> newMeetingRoom(MeetingRoom meetingRoom);
+
+    /**
+     * 根据会议室名查询会议室
+     * @author 刘仁楠
+     * @date 2018/5/21 10:39
+     */
+    public Map<String, Object> getMeetingRoomByRoomName(String roomName);
 }

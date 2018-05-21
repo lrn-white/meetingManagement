@@ -85,23 +85,40 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
 
     /**
      * 根据roomID修改会议室详情
+     *
      * @author 刘仁楠
      * @date 2018/5/18 15:17
      */
     @Override
-    public Map<String,Object> updateMeetingRoomByRoomID(MeetingRoom meetingRoom){
+    public Map<String, Object> updateMeetingRoomByRoomID(MeetingRoom meetingRoom) {
         meetingRoomDao.updateMeetingRoomByRoomID(meetingRoom);
         return MsgTemplate.successMsg();
     }
 
     /**
      * 新增会议室
+     *
      * @author 刘仁楠
      * @date 2018/5/18 16:21
      */
     @Override
-    public Map<String,Object> newMeetingRoom(MeetingRoom meetingRoom){
+    public Map<String, Object> newMeetingRoom(MeetingRoom meetingRoom) {
         meetingRoomDao.newMeetingRoom(meetingRoom);
         return MsgTemplate.successMsg();
+    }
+
+    /**
+     * 根据会议室名查询会议室
+     *
+     * @author 刘仁楠
+     * @date 2018/5/21 10:39
+     */
+    @Override
+    public Map<String, Object> getMeetingRoomByRoomName(String roomName) {
+        MeetingRoom meetingRoom = meetingRoomDao.getMeetingRoomByRoomName(roomName);
+        if (ObjectUtils.isEmpty(meetingRoom)) {
+            return MsgTemplate.failureMsg(MsgEnum.OPS_EMPTY);
+        }
+        return MsgTemplate.successMsg(meetingRoom);
     }
 }

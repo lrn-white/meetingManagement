@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Set;
 
 /**
+ * 权限验证控制
  * @author 刘仁楠
  * @date 2018/5/16 13:18
  */

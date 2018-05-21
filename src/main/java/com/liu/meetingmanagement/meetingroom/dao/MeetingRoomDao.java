@@ -4,8 +4,10 @@ import com.liu.meetingmanagement.meetingroom.model.MeetingRoom;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Vector;
 
 /**
+ * 会议室dao层
  * @author 刘仁楠
  * @date 2018/5/15 11:30
  */
@@ -54,4 +56,11 @@ public interface MeetingRoomDao {
      * @date 2018/5/18 16:21
      */
     public void newMeetingRoom(MeetingRoom meetingRoom);
+
+    /**
+     * 根据会议室名查询会议室
+     * @author 刘仁楠
+     * @date 2018/5/21 10:39
+     */
+    public MeetingRoom getMeetingRoomByRoomName(String roomName);
 }

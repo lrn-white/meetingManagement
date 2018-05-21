@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * 登录验证控制
  * @author 刘仁楠
  * @date 2018/5/16 13:13
  */

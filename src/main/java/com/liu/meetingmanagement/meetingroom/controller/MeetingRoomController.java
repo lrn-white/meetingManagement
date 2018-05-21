@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
+ * 会议室管理控制层
  * @author 刘仁楠
  * @date 2018/5/15 11:22
  */
@@ -111,13 +112,34 @@ public class MeetingRoomController {
      * @author 刘仁楠
      * @date 2018/5/18 16:21
      */
-    @RequestMapping("/newMeetingRoom")
+    @PostMapping("/newMeetingRoom")
     public Map<String,Object> newMeetingRoom(MeetingRoom meetingRoom){
         try {
             if (ObjectUtils.isEmpty(meetingRoom)){
                 return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);
             }else {
                 return meetingRoomService.newMeetingRoom(meetingRoom);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+            return MsgTemplate.failureMsg(MsgEnum.OPS_FAILURE);
+        }
+    }
+
+    /**
+     * 根据会议室名查询会议室
+     *
+     * @author 刘仁楠
+     * @date 2018/5/21 10:39
+     */
+    @PostMapping("/getMeetingRoomByRoomName")
+    public Map<String, Object> getMeetingRoomByRoomName(String roomName) {
+        try {
+            if (roomName.isEmpty()){
+                return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);
+            }else {
+                return meetingRoomService.getMeetingRoomByRoomName(roomName);
             }
         } catch (Exception e) {
             e.printStackTrace();

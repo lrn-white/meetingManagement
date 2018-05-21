@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * 资源dao层
  * @author 刘仁楠
  * @date 2018/5/16 10:34
  */

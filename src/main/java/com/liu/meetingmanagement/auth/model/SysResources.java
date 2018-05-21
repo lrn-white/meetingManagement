@@ -5,6 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
+ * 资源实体类
  * @author 刘仁楠
  * @date 2018/5/16 9:37
  */

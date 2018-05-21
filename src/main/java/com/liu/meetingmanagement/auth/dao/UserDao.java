@@ -4,6 +4,7 @@ import com.liu.meetingmanagement.auth.model.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
+ * 用户dao层
  * @author 刘仁楠
  * @date 2018/5/16 10:26
  */

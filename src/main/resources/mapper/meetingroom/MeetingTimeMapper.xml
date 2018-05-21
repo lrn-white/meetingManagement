@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.meetingmanagement.meetingroom.dao.MeetingTimeDao">
+    <resultMap id="MeetingTimeMap" type="com.liu.meetingmanagement.meetingroom.model.MeetingTime">
+        <result column="timeID" jdbcType="INTEGER" property="timeID"/>
+        <result column="weekTime" jdbcType="VARCHAR" property="weekTime"/>
+        <result column="dayTime" jdbcType="INTEGER" property="dayTime"/>
+    </resultMap>
+
+    <!--获取所有开会时间记录-->
+    <select id="getAllMeetingTime" resultMap="MeetingTimeMap">
+        SELECT *
+        FROM meeting_room_time
+    </select>
+
+    <!--获得会议时间的总数-->
+    <select id="countMeetingTime" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM meeting_room_time
+    </select>
+
+    <!--获得某一时间被使用的次数-->
+    <select id="countUsedTime" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        SELECT count(*)
+        FROM room_time
+        WHERE timeID = #{arg1}
+    </select>
+
+    <!--获得某一时间内被使用的房间ID-->
+    <select id="getUsedRoomID" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT roomID
+        FROM room_time
+        WHERE timeID = #{arg1}
+    </select>
+</mapper>
