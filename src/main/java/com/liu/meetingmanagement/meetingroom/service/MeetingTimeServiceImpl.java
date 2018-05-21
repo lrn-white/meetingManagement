@@ -85,7 +85,6 @@ public class MeetingTimeServiceImpl implements MeetingTimeService {
     public Map<String, Object> getFreeRoom(Integer timeID) {
         int flag = 0;
 
-        int count = meetingRoomDao.countMeetingRoom();
         List<MeetingRoom> meetingRoomList = new ArrayList<>();
 
         List<MeetingRoom> meetingRooms = meetingRoomDao.getAllMeetingRoom();
@@ -98,7 +97,7 @@ public class MeetingTimeServiceImpl implements MeetingTimeService {
                     flag ++;
                 }
             }
-            if (flag != count){
+            if (flag == 0){
                 meetingRoomList.add(meetingRoom);
             }
             flag = 0;
