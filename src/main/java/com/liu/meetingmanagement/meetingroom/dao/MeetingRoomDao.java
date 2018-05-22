@@ -34,7 +34,7 @@ public interface MeetingRoomDao {
      * @author 刘仁楠
      * @date 2018/5/17 17:04
      */
-    public void deleteMeetingRoomByRoomID(int roomID);
+    public int deleteMeetingRoomByRoomID(int roomID);
 
     /**
      * 根据roomID获取会议室详情
@@ -48,14 +48,14 @@ public interface MeetingRoomDao {
      * @author 刘仁楠
      * @date 2018/5/18 15:17
      */
-    public void updateMeetingRoomByRoomID(MeetingRoom meetingRoom);
+    public int updateMeetingRoomByRoomID(MeetingRoom meetingRoom);
 
     /**
      * 新增会议室
      * @author 刘仁楠
      * @date 2018/5/18 16:21
      */
-    public void newMeetingRoom(MeetingRoom meetingRoom);
+    public int newMeetingRoom(MeetingRoom meetingRoom);
 
     /**
      * 根据会议室名查询会议室

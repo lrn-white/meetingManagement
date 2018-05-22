@@ -64,7 +64,10 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
      */
     @Override
     public Map<String, Object> deleteMeetingRoomByRoomID(Integer roomID) {
-        meetingRoomDao.deleteMeetingRoomByRoomID(roomID);
+        int flag = meetingRoomDao.deleteMeetingRoomByRoomID(roomID);
+        if (flag == 0) {
+            return MsgTemplate.failureMsg(MsgEnum.DATA_FAILURE);
+        }
         return MsgTemplate.successMsg();
     }
 
@@ -91,7 +94,10 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
      */
     @Override
     public Map<String, Object> updateMeetingRoomByRoomID(MeetingRoom meetingRoom) {
-        meetingRoomDao.updateMeetingRoomByRoomID(meetingRoom);
+        int flag = meetingRoomDao.updateMeetingRoomByRoomID(meetingRoom);
+        if (flag == 0) {
+            return MsgTemplate.failureMsg(MsgEnum.DATA_FAILURE);
+        }
         return MsgTemplate.successMsg();
     }
 
@@ -103,7 +109,10 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
      */
     @Override
     public Map<String, Object> newMeetingRoom(MeetingRoom meetingRoom) {
-        meetingRoomDao.newMeetingRoom(meetingRoom);
+        int flag = meetingRoomDao.newMeetingRoom(meetingRoom);
+        if (flag == 0) {
+            return MsgTemplate.failureMsg(MsgEnum.DATA_FAILURE);
+        }
         return MsgTemplate.successMsg();
     }
 

@@ -30,9 +30,15 @@ public class MeetingRecordServiceImpl implements MeetingRecordService {
     @Override
     public Map<String, Object> insertRecord(MeetingRecord meetingRecord) {
 //        添加会议室和时间关联
-        meetingRecordDao.insertRoomAndTime(meetingRecord);
+        int flag1 = meetingRecordDao.insertRoomAndTime(meetingRecord);
+        if (flag1 == 0){
+            return MsgTemplate.failureMsg(MsgEnum.DATA_FAILURE);
+        }
 //        添加会议记录
-        meetingRecordDao.insertRecord(meetingRecord);
+        int flag2 = meetingRecordDao.insertRecord(meetingRecord);
+        if (flag2 == 0){
+            return MsgTemplate.failureMsg(MsgEnum.DATA_FAILURE);
+        }
         return MsgTemplate.successMsg();
     }
 }

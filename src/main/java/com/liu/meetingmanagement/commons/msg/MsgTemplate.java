@@ -1,5 +1,6 @@
 package com.liu.meetingmanagement.commons.msg;
 
+import com.baidu.unbiz.fluentvalidator.ComplexResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +54,21 @@ public class MsgTemplate {
     }
 
     /**
+     * 错误输出
+     * @param ret 错误输出
+     * @return
+     */
+    public static Map<String, Object> failureMsg(ComplexResult ret) {
+        if(ret.getErrors().size() > 0){
+
+            return customMsg(false,
+                    ret.getErrors().get(0).getErrorCode() > 0 ?  ret.getErrors().get(0).getErrorCode() : 310015,
+                    ret.getErrors().get(0).getErrorMsg() + "，错误字段："+ret.getErrors().get(0).getField(), null);
+        }
+        return customMsg(false, 310015, null, null);
+    }
+
+    /**
      * 输出模板
      * @author 刘仁楠
      * @date 2018/5/18 10:13
@@ -74,12 +90,37 @@ public class MsgTemplate {
     }
 
     /**
-     * 输出模板
+     * 结果输出模板
      * @author 刘仁楠
      * @date 2018/5/18 10:13
      */
     private static Map<String, Object> customMsg(int msgCode, String message,Object data) {
         Map<String, Object> result = new LinkedHashMap<String, Object>();
+        result.put("code", msgCode);
+        result.put("msg", message);
+        result.put("data", data);
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            logger.info("返回输出：", mapper.writeValueAsString(result));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    /**
+     * 教研输出模板
+     *
+     * @param success the success
+     * @param msgCode the enums code
+     * @param message the message
+     * @param data    the data
+     * @return the map
+     */
+    private static Map<String, Object> customMsg(boolean success, int msgCode, String message, Object data) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("success", success);
         result.put("code", msgCode);
         result.put("msg", message);
         result.put("data", data);

@@ -25,7 +25,7 @@ public enum MsgEnum implements MsgInterface {
 
     PARAMS_ERROR(-1, "参数错误"),
 
-    PERMISSION_NULL(7, "没有权限，请到主账号修改"),
+    DATA_FAILURE(7, "数据库操作失败"),
 
     OPS_EMPTY(8, "返回数据为空"),
 

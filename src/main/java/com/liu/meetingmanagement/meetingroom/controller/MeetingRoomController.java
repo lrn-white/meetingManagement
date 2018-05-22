@@ -1,7 +1,12 @@
 package com.liu.meetingmanagement.meetingroom.controller;
 
+import com.baidu.unbiz.fluentvalidator.ComplexResult;
+import com.baidu.unbiz.fluentvalidator.FluentValidator;
+import com.baidu.unbiz.fluentvalidator.ResultCollectors;
+import com.baidu.unbiz.fluentvalidator.jsr303.HibernateSupportedValidator;
 import com.liu.meetingmanagement.commons.msg.MsgEnum;
 import com.liu.meetingmanagement.commons.msg.MsgTemplate;
+import com.liu.meetingmanagement.meetingroom.model.MeetingRecord;
 import com.liu.meetingmanagement.meetingroom.model.MeetingRoom;
 import com.liu.meetingmanagement.meetingroom.service.MeetingRoomService;
 import org.slf4j.Logger;
@@ -12,10 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Validation;
 import java.util.Map;
 
 /**
  * 会议室管理控制层
+ *
  * @author 刘仁楠
  * @date 2018/5/15 11:22
  */
@@ -54,6 +61,17 @@ public class MeetingRoomController {
     @PostMapping("/deleteMeetingRoomByRoomID")
     public Map<String, Object> deleteMeetingRoomByRoomID(Integer roomID) {
         try {
+////            校验参数类型
+//            MeetingRoom meetingRoom = new MeetingRoom();
+//            meetingRoom.setRoomID(roomID);
+//            ComplexResult ret = FluentValidator.checkAll().failFast()
+//                    .on(meetingRoom, new HibernateSupportedValidator<MeetingRoom>().setHiberanteValidator
+//                            (Validation.buildDefaultValidatorFactory().getValidator()))
+//                    .doValidate().result(ResultCollectors.toComplex());
+//            if (!ret.isSuccess()) {
+//                return MsgTemplate.failureMsg(ret);
+//            }
+
             if (roomID == null) {
                 return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);
             } else {
@@ -89,13 +107,14 @@ public class MeetingRoomController {
 
     /**
      * 根据roomID修改会议室详情
+     *
      * @author 刘仁楠
      * @date 2018/5/18 15:17
      */
     @PostMapping("/updateMeetingRoomByRoomID")
-    public Map<String,Object> updateMeetingRoomByRoomID(MeetingRoom meetingRoom){
+    public Map<String, Object> updateMeetingRoomByRoomID(MeetingRoom meetingRoom) {
         try {
-            if (meetingRoom.getRoomID() == null){
+            if (meetingRoom.getRoomID() == null) {
                 return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);
             } else {
                 return meetingRoomService.updateMeetingRoomByRoomID(meetingRoom);
@@ -109,15 +128,16 @@ public class MeetingRoomController {
 
     /**
      * 新增会议室
+     *
      * @author 刘仁楠
      * @date 2018/5/18 16:21
      */
     @PostMapping("/newMeetingRoom")
-    public Map<String,Object> newMeetingRoom(MeetingRoom meetingRoom){
+    public Map<String, Object> newMeetingRoom(MeetingRoom meetingRoom) {
         try {
-            if (ObjectUtils.isEmpty(meetingRoom)){
+            if (ObjectUtils.isEmpty(meetingRoom)) {
                 return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);
-            }else {
+            } else {
                 return meetingRoomService.newMeetingRoom(meetingRoom);
             }
         } catch (Exception e) {
@@ -136,9 +156,9 @@ public class MeetingRoomController {
     @PostMapping("/getMeetingRoomByRoomName")
     public Map<String, Object> getMeetingRoomByRoomName(String roomName) {
         try {
-            if (roomName.isEmpty()){
+            if (roomName.isEmpty()) {
                 return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);
-            }else {
+            } else {
                 return meetingRoomService.getMeetingRoomByRoomName(roomName);
             }
         } catch (Exception e) {

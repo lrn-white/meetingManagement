@@ -94,10 +94,10 @@ public class MeetingTimeServiceImpl implements MeetingTimeService {
         for (MeetingRoom meetingRoom : meetingRooms) {
             for (Integer roomID : roomIDs) {
                 if (roomID.equals(meetingRoom.getRoomID())) {
-                    flag ++;
+                    flag++;
                 }
             }
-            if (flag == 0){
+            if (flag == 0) {
                 meetingRoomList.add(meetingRoom);
             }
             flag = 0;

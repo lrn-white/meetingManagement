@@ -15,12 +15,12 @@ public interface MeetingRecordDao {
      * @author 刘仁楠
      * @date 2018/5/22 14:00
      */
-    public void insertRecord(MeetingRecord meetingRecord);
+    public int insertRecord(MeetingRecord meetingRecord);
 
     /**
      * 插入时间和会议室关联
      * @author 刘仁楠
      * @date 2018/5/22 14:38
      */
-    public void insertRoomAndTime(MeetingRecord meetingRecord);
+    public int insertRoomAndTime(MeetingRecord meetingRecord);
 }
