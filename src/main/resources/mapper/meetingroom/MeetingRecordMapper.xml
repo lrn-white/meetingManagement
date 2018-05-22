@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liu.meetingmanagement.meetingroom.dao.MeetingRecordDao">
+    <resultMap id="MeetingRoomMap" type="com.liu.meetingmanagement.meetingroom.model.MeetingRecord">
+        <result column="recordID" jdbcType="INTEGER" property="recordID"/>
+        <result column="applicantName" jdbcType="VARCHAR" property="applicantName"/>
+        <result column="participantName" jdbcType="VARCHAR" property="participantName"/>
+        <result column="meetingRoomID" jdbcType="INTEGER" property="meetingRoomID"/>
+        <result column="roomID" jdbcType="INTEGER" property="roomID"/>
+        <result column="timeID" jdbcType="VARCHAR" property="timeID"/>
+        <result column="meetingTopic" jdbcType="VARCHAR" property="meetingTopic"/>
+    </resultMap>
+
+    <!--插入会议记录-->
+    <insert id="insertRecord">
+        INSERT INTO meeting_room_use_record
+        (recordID, applicantName, participantName, roomID, timeID, openDate, meetingTopic)
+        VALUE
+        (#{recordID}, #{applicantName}, #{participantName}, #{roomID}, #{timeID}, #{openDate}, #{meetingTopic})
+    </insert>
+
+    <!--插入时间和会议室关联-->
+    <insert id="insertRoomAndTime">
+        INSERT INTO room_time
+        (roomID, timeID)
+        VALUE
+        (#{roomID}, #{timeID})
+    </insert>
+</mapper>
