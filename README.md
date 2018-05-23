@@ -1,5 +1,5 @@
-后台使用SpringBoot+shiro+redis+druid技术   
-前端使用layui
+后台使用SpringBoot+shiro+redis+druid技术   
+前端使用layui   
 主要实现以下功能   
 1.shiro+redis实现登录权限管理   
 2.会议室的增删改查   
