@@ -1,12 +1,7 @@
 package com.liu.meetingmanagement.meetingroom.controller;
 
-import com.baidu.unbiz.fluentvalidator.ComplexResult;
-import com.baidu.unbiz.fluentvalidator.FluentValidator;
-import com.baidu.unbiz.fluentvalidator.ResultCollectors;
-import com.baidu.unbiz.fluentvalidator.jsr303.HibernateSupportedValidator;
 import com.liu.meetingmanagement.commons.msg.MsgEnum;
 import com.liu.meetingmanagement.commons.msg.MsgTemplate;
-import com.liu.meetingmanagement.meetingroom.model.MeetingRecord;
 import com.liu.meetingmanagement.meetingroom.model.MeetingRoom;
 import com.liu.meetingmanagement.meetingroom.service.MeetingRoomService;
 import org.slf4j.Logger;
@@ -61,17 +56,6 @@ public class MeetingRoomController {
     @PostMapping("/deleteMeetingRoomByRoomID")
     public Map<String, Object> deleteMeetingRoomByRoomID(Integer roomID) {
         try {
-////            校验参数类型
-//            MeetingRoom meetingRoom = new MeetingRoom();
-//            meetingRoom.setRoomID(roomID);
-//            ComplexResult ret = FluentValidator.checkAll().failFast()
-//                    .on(meetingRoom, new HibernateSupportedValidator<MeetingRoom>().setHiberanteValidator
-//                            (Validation.buildDefaultValidatorFactory().getValidator()))
-//                    .doValidate().result(ResultCollectors.toComplex());
-//            if (!ret.isSuccess()) {
-//                return MsgTemplate.failureMsg(ret);
-//            }
-
             if (roomID == null) {
                 return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);
             } else {

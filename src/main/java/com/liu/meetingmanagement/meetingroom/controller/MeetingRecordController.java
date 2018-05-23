@@ -1,9 +1,5 @@
 package com.liu.meetingmanagement.meetingroom.controller;
 
-import com.baidu.unbiz.fluentvalidator.ComplexResult;
-import com.baidu.unbiz.fluentvalidator.FluentValidator;
-import com.baidu.unbiz.fluentvalidator.ResultCollectors;
-import com.baidu.unbiz.fluentvalidator.jsr303.HibernateSupportedValidator;
 import com.liu.meetingmanagement.commons.msg.MsgEnum;
 import com.liu.meetingmanagement.commons.msg.MsgTemplate;
 import com.liu.meetingmanagement.meetingroom.model.MeetingRecord;
@@ -15,7 +11,6 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Validation;
 import java.util.Map;
 
 /**
@@ -39,15 +34,6 @@ public class MeetingRecordController {
     @RequestMapping("/insertRecord")
     public Map<String, Object> insertRecord(MeetingRecord meetingRecord) {
         try {
-////            校验参数类型
-//            ComplexResult ret = FluentValidator.checkAll().failFast()
-//                    .on(meetingRecord, new HibernateSupportedValidator<MeetingRecord>().setHiberanteValidator
-//                            (Validation.buildDefaultValidatorFactory().getValidator()))
-//                    .doValidate().result(ResultCollectors.toComplex());
-//            if(!ret.isSuccess()){
-//                return MsgTemplate.failureMsg(ret);
-//            }
-
             if (ObjectUtils.isEmpty(meetingRecord)){
                 return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);
             }else {
