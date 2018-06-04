@@ -2,6 +2,7 @@ package com.liu.meetingmanagement.meetingroom.controller;
 
 import com.liu.meetingmanagement.commons.msg.MsgEnum;
 import com.liu.meetingmanagement.commons.msg.MsgTemplate;
+import com.liu.meetingmanagement.email.service.EmailService;
 import com.liu.meetingmanagement.meetingroom.model.MeetingRecord;
 import com.liu.meetingmanagement.meetingroom.service.MeetingRecordService;
 import org.slf4j.Logger;
@@ -28,15 +29,17 @@ public class MeetingRecordController {
 
     /**
      * 插入会议记录
+     *
      * @author 刘仁楠
      * @date 2018/5/22 14:00
      */
     @RequestMapping("/insertRecord")
     public Map<String, Object> insertRecord(MeetingRecord meetingRecord) {
         try {
-            if (ObjectUtils.isEmpty(meetingRecord)){
+            if (ObjectUtils.isEmpty(meetingRecord)) {
                 return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);
-            }else {
+            } else {
+
                 return meetingRecordService.insertRecord(meetingRecord);
             }
         } catch (Exception e) {

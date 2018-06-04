@@ -55,6 +55,24 @@ spring:
         min-idle: 0
     # 连接超时时间（毫秒）
     timeout: 0ms
+#  配置rabbitMQ
+  rabbitmq:
+    addresses: 127.0.0.1:5672
+    username: guest
+    password: guest
+    publisher-confirms: true
+    virtual-host: /
+#  邮件配置
+  mail:
+    host: smtp.163.com
+    #发送者的邮箱密码
+    password: 19960614asd
+    #端口
+    port: 25
+    #协议
+    protocol: smtp
+    #发送者的邮箱账号
+    username: liurennan1996@163.com
 
 #配置mapper
 mybatis:

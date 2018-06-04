@@ -10,10 +10,45 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-05-22 15:40:14
+Date: 2018-05-31 17:32:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for email_record
+-- ----------------------------
+DROP TABLE IF EXISTS `email_record`;
+CREATE TABLE `email_record` (
+  `recordID` int(11) NOT NULL AUTO_INCREMENT COMMENT '记录ID',
+  `email` varchar(255) DEFAULT NULL COMMENT '邮箱号',
+  `senderName` varchar(60) DEFAULT NULL COMMENT '发送人姓名',
+  `receiverName` varchar(60) DEFAULT NULL COMMENT '收信人姓名',
+  `context` varchar(255) DEFAULT NULL COMMENT '邮件内容',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`recordID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of email_record
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for email_template
+-- ----------------------------
+DROP TABLE IF EXISTS `email_template`;
+CREATE TABLE `email_template` (
+  `templateID` int(11) NOT NULL AUTO_INCREMENT COMMENT '模板ID',
+  `createrID` int(11) DEFAULT NULL COMMENT '创建人ID',
+  `content` varchar(255) DEFAULT NULL COMMENT '内容',
+  `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`templateID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of email_template
+-- ----------------------------
+INSERT INTO `email_template` VALUES ('1', '1', '请参加会议，时间地点如下：', '2018-05-29 16:12:54');
 
 -- ----------------------------
 -- Table structure for meeting_room
@@ -51,42 +86,43 @@ CREATE TABLE `meeting_room_time` (
   `timeID` int(11) NOT NULL AUTO_INCREMENT COMMENT '开放时间id',
   `weekTime` varchar(20) NOT NULL COMMENT '周时间',
   `dayTime` varchar(30) NOT NULL COMMENT '天时间',
+  `state` int(11) DEFAULT '0',
   PRIMARY KEY (`timeID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of meeting_room_time
 -- ----------------------------
-INSERT INTO `meeting_room_time` VALUES ('1', 'monday', '9:30~10:30');
-INSERT INTO `meeting_room_time` VALUES ('2', 'monday', '10:30~11:30');
-INSERT INTO `meeting_room_time` VALUES ('3', 'monday', '13:30~14:30');
-INSERT INTO `meeting_room_time` VALUES ('4', 'monday', '14:30~15:30');
-INSERT INTO `meeting_room_time` VALUES ('5', 'monday', '15:30~16:30');
-INSERT INTO `meeting_room_time` VALUES ('6', 'monday', '16:30~17:30');
-INSERT INTO `meeting_room_time` VALUES ('7', 'Tuesday', '9:30~10:30');
-INSERT INTO `meeting_room_time` VALUES ('8', 'Tuesday', '10:30~11:30');
-INSERT INTO `meeting_room_time` VALUES ('9', 'Tuesday', '13:30~14:30');
-INSERT INTO `meeting_room_time` VALUES ('10', 'Tuesday', '14:30~15:30');
-INSERT INTO `meeting_room_time` VALUES ('11', 'Tuesday', '15:30~16:30');
-INSERT INTO `meeting_room_time` VALUES ('12', 'Tuesday', '16:30~17:30');
-INSERT INTO `meeting_room_time` VALUES ('13', 'Wednesday', '9:30~10:30');
-INSERT INTO `meeting_room_time` VALUES ('14', 'Wednesday', '10:30~11:30');
-INSERT INTO `meeting_room_time` VALUES ('15', 'Wednesday', '13:30~14:30');
-INSERT INTO `meeting_room_time` VALUES ('16', 'Wednesday', '14:30~15:30');
-INSERT INTO `meeting_room_time` VALUES ('17', 'Wednesday', '15:30~16:30');
-INSERT INTO `meeting_room_time` VALUES ('18', 'Wednesday', '16:30~17:30');
-INSERT INTO `meeting_room_time` VALUES ('19', 'Thursday', '9:30~10:30');
-INSERT INTO `meeting_room_time` VALUES ('20', 'Thursday', '10:30~11:30');
-INSERT INTO `meeting_room_time` VALUES ('21', 'Thursday', '13:30~14:30');
-INSERT INTO `meeting_room_time` VALUES ('22', 'Thursday', '14:30~15:30');
-INSERT INTO `meeting_room_time` VALUES ('23', 'Thursday', '15:30~16:30');
-INSERT INTO `meeting_room_time` VALUES ('24', 'Thursday', '16:30~17:30');
-INSERT INTO `meeting_room_time` VALUES ('25', 'Friday', '9:30~10:30');
-INSERT INTO `meeting_room_time` VALUES ('26', 'Friday', '10:30~11:30');
-INSERT INTO `meeting_room_time` VALUES ('27', 'Friday', '13:30~14:30');
-INSERT INTO `meeting_room_time` VALUES ('28', 'Friday', '14:30~15:30');
-INSERT INTO `meeting_room_time` VALUES ('29', 'Friday', '15:30~16:30');
-INSERT INTO `meeting_room_time` VALUES ('30', 'Friday', '16:30~17:30');
+INSERT INTO `meeting_room_time` VALUES ('1', 'monday', '9:30~10:30', '1');
+INSERT INTO `meeting_room_time` VALUES ('2', 'monday', '10:30~11:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('3', 'monday', '13:30~14:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('4', 'monday', '14:30~15:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('5', 'monday', '15:30~16:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('6', 'monday', '16:30~17:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('7', 'Tuesday', '9:30~10:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('8', 'Tuesday', '10:30~11:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('9', 'Tuesday', '13:30~14:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('10', 'Tuesday', '14:30~15:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('11', 'Tuesday', '15:30~16:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('12', 'Tuesday', '16:30~17:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('13', 'Wednesday', '9:30~10:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('14', 'Wednesday', '10:30~11:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('15', 'Wednesday', '13:30~14:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('16', 'Wednesday', '14:30~15:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('17', 'Wednesday', '15:30~16:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('18', 'Wednesday', '16:30~17:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('19', 'Thursday', '9:30~10:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('20', 'Thursday', '10:30~11:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('21', 'Thursday', '13:30~14:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('22', 'Thursday', '14:30~15:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('23', 'Thursday', '15:30~16:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('24', 'Thursday', '16:30~17:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('25', 'Friday', '9:30~10:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('26', 'Friday', '10:30~11:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('27', 'Friday', '13:30~14:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('28', 'Friday', '14:30~15:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('29', 'Friday', '15:30~16:30', '0');
+INSERT INTO `meeting_room_time` VALUES ('30', 'Friday', '16:30~17:30', '0');
 
 -- ----------------------------
 -- Table structure for meeting_room_use_record
@@ -101,7 +137,7 @@ CREATE TABLE `meeting_room_use_record` (
   `openDate` varchar(60) DEFAULT NULL COMMENT '开会日期',
   `meetingTopic` varchar(255) DEFAULT NULL COMMENT '会议议题',
   PRIMARY KEY (`recordID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of meeting_room_use_record
@@ -109,6 +145,9 @@ CREATE TABLE `meeting_room_use_record` (
 INSERT INTO `meeting_room_use_record` VALUES ('4', '张三', '张三，李四，王五', '4', '2', '2018-05-22', '测试1');
 INSERT INTO `meeting_room_use_record` VALUES ('5', '张三', '李四，王五，赵六', '5', '2', '2018-05-22', '测试2');
 INSERT INTO `meeting_room_use_record` VALUES ('6', '张三', '张三&李四&欧阳', '6', '2', '2018-05-22', '测试5');
+INSERT INTO `meeting_room_use_record` VALUES ('7', '张三', '张三', '7', '2', '2018-05-22', '测试');
+INSERT INTO `meeting_room_use_record` VALUES ('8', 'admin', 'user1,user2', '8', '2', '2018-05-31', '测试邮件');
+INSERT INTO `meeting_room_use_record` VALUES ('16', 'admin', 'admin', '9', '2', '2018-05-31', '测试');
 
 -- ----------------------------
 -- Table structure for room_time
@@ -168,6 +207,9 @@ INSERT INTO `room_time` VALUES ('3', '2');
 INSERT INTO `room_time` VALUES ('4', '2');
 INSERT INTO `room_time` VALUES ('5', '2');
 INSERT INTO `room_time` VALUES ('6', '2');
+INSERT INTO `room_time` VALUES ('7', '2');
+INSERT INTO `room_time` VALUES ('8', '2');
+INSERT INTO `room_time` VALUES ('9', '2');
 
 -- ----------------------------
 -- Table structure for sys_resources
@@ -235,20 +277,21 @@ CREATE TABLE `sys_user` (
   `userID` int(11) NOT NULL AUTO_INCREMENT COMMENT '?û?id',
   `userName` varchar(60) NOT NULL COMMENT '?û???',
   `password` varchar(60) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', 'admin');
-INSERT INTO `sys_user` VALUES ('2', 'user1', 'user1');
-INSERT INTO `sys_user` VALUES ('3', 'user2', 'user2');
-INSERT INTO `sys_user` VALUES ('4', 'user3', 'user3');
-INSERT INTO `sys_user` VALUES ('5', 'user4', 'user4');
-INSERT INTO `sys_user` VALUES ('6', 'user5', 'user5');
-INSERT INTO `sys_user` VALUES ('7', 'user6', 'user6');
-INSERT INTO `sys_user` VALUES ('8', 'user7', 'user7');
+INSERT INTO `sys_user` VALUES ('1', 'admin', 'admin', 'liurennan1996@163.com');
+INSERT INTO `sys_user` VALUES ('2', 'user1', 'user1', 'liurennan1996@163.com');
+INSERT INTO `sys_user` VALUES ('3', 'user2', 'user2', 'liurennan1996@163.com');
+INSERT INTO `sys_user` VALUES ('4', 'user3', 'user3', null);
+INSERT INTO `sys_user` VALUES ('5', 'user4', 'user4', null);
+INSERT INTO `sys_user` VALUES ('6', 'user5', 'user5', null);
+INSERT INTO `sys_user` VALUES ('7', 'user6', 'user6', null);
+INSERT INTO `sys_user` VALUES ('8', 'user7', 'user7', null);
 
 -- ----------------------------
 -- Table structure for sys_user_role

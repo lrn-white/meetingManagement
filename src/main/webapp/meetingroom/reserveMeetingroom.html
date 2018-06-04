@@ -74,7 +74,7 @@
 
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button class="layui-btn" lay-submit="" lay-filter="submit">立即提交</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
@@ -110,7 +110,11 @@
                 });
                 $("#chooseTime").html(tmpArr.join(""));
                 form.render('select');
-                chooseRoom();
+                chooseRoom(data)
+
+                // $('#chooseTime').val();
+                // var timeID = $('#chooseTime option:selected').val();
+                // chooseRoom(timeID);
             },
             error: function () {
                 alert("对不起！数据加载失败！");
@@ -118,7 +122,7 @@
 
         });
 
-        // 显示选择会议室
+        // 选择会议室,不知道怎么实现layui点击下拉按钮时立即刷新，写死数据
         function chooseRoom(data) {
             var tmpArr2 = [];
             $.ajax({
@@ -144,18 +148,16 @@
         }
 
         //监听提交
-        form.on('submit(demo1)', function (data) {
+        form.on('submit(submit)', function (data) {
             var data = data.field;
             $.ajax({
                 url: "/meetingRecord/insertRecord?applicantName=" + data.applicantName + "&participantName="
                 + data.participantName + "&roomID=" + data.roomID + "&timeID=" + data.timeID + "&openDate="
                 + data.openDate + "&meetingTopic=" + data.meetingTopic,
-                // url: "/meetingRecord/insertRecord",
                 type: "post",
-                // data: data,
-                error: function () {
-                    alert("对不起！数据加载失败！");
-                }
+                // error: function () {
+                //     alert("输入有误");
+                // }
             });
         });
     });

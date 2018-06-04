@@ -1,6 +1,5 @@
 package com.liu.meetingmanagement.commons.msg;
 
-import com.baidu.unbiz.fluentvalidator.ComplexResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,21 +50,6 @@ public class MsgTemplate {
      */
     public static Map<String, Object> failureMsg(MsgInterface message) {
         return customMsg( message.getCode(), message.getMsg(),0, null);
-    }
-
-    /**
-     * 错误输出
-     * @param ret 错误输出
-     * @return
-     */
-    public static Map<String, Object> failureMsg(ComplexResult ret) {
-        if(ret.getErrors().size() > 0){
-
-            return customMsg(false,
-                    ret.getErrors().get(0).getErrorCode() > 0 ?  ret.getErrors().get(0).getErrorCode() : 310015,
-                    ret.getErrors().get(0).getErrorMsg() + "，错误字段："+ret.getErrors().get(0).getField(), null);
-        }
-        return customMsg(false, 310015, null, null);
     }
 
     /**

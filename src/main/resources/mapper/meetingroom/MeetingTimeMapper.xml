@@ -6,7 +6,8 @@
     <resultMap id="MeetingTimeMap" type="com.liu.meetingmanagement.meetingroom.model.MeetingTime">
         <result column="timeID" jdbcType="INTEGER" property="timeID"/>
         <result column="weekTime" jdbcType="VARCHAR" property="weekTime"/>
-        <result column="dayTime" jdbcType="INTEGER" property="dayTime"/>
+        <result column="dayTime" jdbcType="VARCHAR" property="dayTime"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
     </resultMap>
 
     <!--获取所有开会时间记录-->
@@ -34,4 +35,25 @@
         FROM room_time
         WHERE timeID = #{arg1}
     </select>
+
+    <!--根据会议时间状态获得空闲时间-->
+    <select id="getFreeTimeID" resultType="java.lang.Integer">
+        SELECT *
+        FROM meeting_room_time
+        WHERE state = 0
+    </select>
+
+    <!--根据TimeID获得meetingTime详情-->
+    <select id="getTimeBytimeID" resultMap="MeetingTimeMap">
+        SELECT *
+        FROM meeting_room_time
+        WHERE timeId = #{arg1}
+    </select>
+
+    <!--修改某一时间段的状态-->
+    <update id="changeState" parameterType="java.lang.Integer">
+        UPDATE meeting_room_time
+        SET state = 1
+        WHERE timeID = #{argq}
+    </update>
 </mapper>

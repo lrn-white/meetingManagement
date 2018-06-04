@@ -41,4 +41,25 @@ public interface MeetingTimeDao {
      * @date 2018/5/21 16:25
      */
     public List<Integer> getUsedRoomID(Integer timeID);
+
+    /**
+     * 根据会议时间状态获得空闲时间
+     * @author 刘仁楠
+     * @date 2018/5/31 16:01
+     */
+    public List<Integer> getFreeTimeID();
+
+    /**
+     * 根据TimeID获得meetingTime详情
+     * @author 刘仁楠
+     * @date 2018/5/31 16:29
+     */
+    public MeetingTime getTimeBytimeID(Integer freeTimeID);
+
+    /**
+     * 修改某一时间段的状态
+     * @author 刘仁楠
+     * @date 2018/5/31 16:49
+     */
+    public Integer changeState(Integer timeID);
 }

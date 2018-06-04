@@ -19,4 +19,8 @@ public class MeetingTime implements Serializable{
     private String weekTime;
 
     private String dayTime;
+    /**
+     * 1为会议室已满，0为有空闲会议室
+     */
+    private Integer state;
 }

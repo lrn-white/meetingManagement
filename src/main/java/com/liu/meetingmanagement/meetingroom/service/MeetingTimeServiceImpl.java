@@ -53,24 +53,37 @@ public class MeetingTimeServiceImpl implements MeetingTimeService {
      */
     @Override
     public Map<String, Object> getFreeTime() {
-        Integer countRoom = meetingRoomDao.countMeetingRoom();
+//        Integer countRoom = meetingRoomDao.countMeetingRoom();
+//
+//        List<MeetingTime> meetingTimes = meetingTimeDao.getAllMeetingTime();
+//
+////        判断某一时间已使用的次数是否已经满了
+//        List<MeetingTime> meetingTimeList = new ArrayList<>();
+//        for (MeetingTime meetingTime : meetingTimes) {
+//            Integer timeID = meetingTime.getTimeID();
+//            Integer countUsedTime = meetingTimeDao.countUsedTime(timeID);
+//            if (countUsedTime < countRoom) {
+//                meetingTimeList.add(meetingTime);
+//            }
+//        }
+//
+////        对返回数据判空
+//        if (ObjectUtils.isEmpty(meetingTimeList)) {
+//            return MsgTemplate.failureMsg(MsgEnum.OPS_EMPTY);
+//        } else {
+//            return MsgTemplate.successMsg(meetingTimeList);
+//        }
 
-        List<MeetingTime> meetingTimes = meetingTimeDao.getAllMeetingTime();
-
-//        判断某一时间已使用的次数是否已经满了
-        List<MeetingTime> meetingTimeList = new ArrayList<>();
-        for (MeetingTime meetingTime : meetingTimes) {
-            Integer timeID = meetingTime.getTimeID();
-            Integer countUsedTime = meetingTimeDao.countUsedTime(timeID);
-            if (countUsedTime < countRoom) {
-                meetingTimeList.add(meetingTime);
-            }
-        }
-
-//        对返回数据判空
-        if (ObjectUtils.isEmpty(meetingTimeList)) {
+        List<Integer> freeTimeIDs = meetingTimeDao.getFreeTimeID();
+        if (ObjectUtils.isEmpty(freeTimeIDs)){
             return MsgTemplate.failureMsg(MsgEnum.OPS_EMPTY);
         } else {
+
+            List<MeetingTime> meetingTimeList = new ArrayList<>();
+            for (Integer freeTimeID: freeTimeIDs) {
+                MeetingTime meetingTime = meetingTimeDao.getTimeBytimeID(freeTimeID);
+                meetingTimeList.add(meetingTime);
+            }
             return MsgTemplate.successMsg(meetingTimeList);
         }
     }
