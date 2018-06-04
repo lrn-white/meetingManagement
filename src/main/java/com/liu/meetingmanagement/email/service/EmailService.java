@@ -1,5 +1,7 @@
 package com.liu.meetingmanagement.email.service;
 
+import com.liu.meetingmanagement.meetingroom.model.MeetingRecord;
+
 import java.util.Map;
 
 /**
@@ -13,5 +15,5 @@ public interface EmailService {
      * @author 刘仁楠
      * @date 2018/5/31 10:27
      */
-    public Integer sendGroupEmail(String userNames);
+    public Integer sendGroupEmail(MeetingRecord meetingRecord);
 }

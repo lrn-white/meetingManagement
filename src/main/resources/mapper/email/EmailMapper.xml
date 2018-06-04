@@ -8,4 +8,11 @@
         FROM sys_user
         WHERE userName = #{userName}
     </select>
+
+    <!--根据templateID获得模板内容-->
+    <select id="getEmailTemplateContent" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT content
+        FROM email_template
+        WHERE templateID = #{arg1}
+    </select>
 </mapper>

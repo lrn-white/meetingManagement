@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liu.meetingmanagement.email.dao.EmailRecordDao">
+    <resultMap id="MeetingRecordMap" type="com.liu.meetingmanagement.meetingroom.model.MeetingRecord">
+        <result column="recordID" jdbcType="INTEGER" property="recordID"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="senderName" jdbcType="VARCHAR" property="senderName"/>
+        <result column="receiverName" jdbcType="VARCHAR" property="receiverName"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+    </resultMap>
+
+    <!--插入邮件发送记录-->
+    <insert id="addEmailReocrd">
+        INSERT INTO email_record
+        (email, senderName, receiverName, content)
+        VALUES
+        (#{email}, #{senderName}, #{receiverName}, #{content})
+    </insert>
+</mapper>

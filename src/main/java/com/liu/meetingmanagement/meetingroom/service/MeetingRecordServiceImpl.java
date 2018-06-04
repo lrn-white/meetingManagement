@@ -41,10 +41,8 @@ public class MeetingRecordServiceImpl implements MeetingRecordService {
      */
     @Override
     public Map<String, Object> insertRecord(MeetingRecord meetingRecord) {
-
-//        整合申请人和参会人员姓名
-        String userNames = meetingRecord.getApplicantName() + "," + meetingRecord.getParticipantName();
-        Integer flag3 = emailService.sendGroupEmail(userNames);
+//        判断邮件是否发送成功
+        Integer flag3 = emailService.sendGroupEmail(meetingRecord);
         if (flag3 == 0) {
             return MsgTemplate.failureMsg(MsgEnum.OPS_FAILURE);
         }
