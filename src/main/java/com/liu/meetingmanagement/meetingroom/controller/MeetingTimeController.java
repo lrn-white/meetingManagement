@@ -46,7 +46,7 @@ public class MeetingTimeController {
      * @date 2018/5/21 16:15
      */
     @PostMapping("/getFreeRoom")
-    public Map<String, Object> getFreeRoom(Integer timeID) {
+        public Map<String, Object> getFreeRoom(Integer timeID) {
         try {
             if (ObjectUtils.isEmpty(timeID)){
                 return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);

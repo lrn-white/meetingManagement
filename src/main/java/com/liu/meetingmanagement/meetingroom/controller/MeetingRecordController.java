@@ -28,7 +28,7 @@ public class MeetingRecordController {
     private MeetingRecordService meetingRecordService;
 
     /**
-     * 插入会议记录
+     * 插入会议申请记录
      *
      * @author 刘仁楠
      * @date 2018/5/22 14:00

@@ -5,4 +5,5 @@
 2.会议室的增删改查   
 3.普通用户预定会议室   
 登录界面：http://localhost:8080/login   
-管理员账号密码：admin admin
+管理员账号密码：admin admin   
+接口文档地址：http://www.xiaoyaoji.cn/doc/Tz63QK9EO

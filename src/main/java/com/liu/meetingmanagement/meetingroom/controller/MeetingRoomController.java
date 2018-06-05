@@ -37,9 +37,14 @@ public class MeetingRoomController {
      * @date 2018/5/15 11:38
      */
     @RequestMapping("/getAllMeetingRoom")
-    public Map<String, Object> getAllMeetingRoom(int page, int limit) {
+    public Map<String, Object> getAllMeetingRoom(Integer page, Integer limit) {
         try {
-            return meetingRoomService.getAllMeetingRoom(page, limit);
+//            参数判空
+            if (ObjectUtils.isEmpty(page) || ObjectUtils.isEmpty(limit)) {
+                return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);
+            } else {
+                return meetingRoomService.getAllMeetingRoom(page, limit);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
@@ -140,7 +145,7 @@ public class MeetingRoomController {
     @PostMapping("/getMeetingRoomByRoomName")
     public Map<String, Object> getMeetingRoomByRoomName(String roomName) {
         try {
-            if (roomName.isEmpty()) {
+            if (ObjectUtils.isEmpty(roomName)) {
                 return MsgTemplate.failureMsg(MsgEnum.PARAMS_EMPTY);
             } else {
                 return meetingRoomService.getMeetingRoomByRoomName(roomName);
